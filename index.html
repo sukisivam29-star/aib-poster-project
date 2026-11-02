@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaQuant AI — Indian Stock Market (NSE & BSE) Trend Prediction Terminal</title>
+    <!-- Google Fonts for High-End Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- 1. REAL-TIME TICKER TAPE (INDIAN MARKET INDICES & EQUITIES) -->
+    <div class="ticker-tape">
+        <div class="tape-live-indicator">
+            <span class="pulse-dot"></span> LIVE NSE & BSE
+        </div>
+        <div class="ticker-items" id="tickerItemsContainer">
+            <div class="ticker-item"><span class="ticker-sym">NIFTY 50</span> <span class="ticker-val text-green">₹24,205.30</span></div>
+            <div class="ticker-item"><span class="ticker-sym">SENSEX</span> <span class="ticker-val text-green">₹79,420.50</span></div>
+            <div class="ticker-item"><span class="ticker-sym">RELIANCE</span> <span class="ticker-val text-green">₹2,985.40</span></div>
+            <div class="ticker-item"><span class="ticker-sym">TCS</span> <span class="ticker-val text-green">₹3,940.20</span></div>
+            <div class="ticker-item"><span class="ticker-sym">HDFCBANK</span> <span class="ticker-val text-green">₹1,682.50</span></div>
+            <div class="ticker-item"><span class="ticker-sym">INFY</span> <span class="ticker-val text-green">₹1,865.30</span></div>
+            <div class="ticker-item"><span class="ticker-sym">TATAMOTORS</span> <span class="ticker-val text-green">₹984.70</span></div>
+            <div class="ticker-item"><span class="ticker-sym">ICICIBANK</span> <span class="ticker-val text-green">₹1,248.80</span></div>
+            <div class="ticker-item"><span class="ticker-sym">BANK NIFTY</span> <span class="ticker-val text-green">₹51,820.00</span></div>
+            <div class="ticker-item"><span class="ticker-sym">GOLD (10g)</span> <span class="ticker-val text-green">₹78,450.00</span></div>
+            <div class="ticker-item"><span class="ticker-sym">USD/INR</span> <span class="ticker-val" id="tickerUsdInr">₹86.85</span></div>
+            <div class="ticker-item"><span class="ticker-sym">INR/USD</span> <span class="ticker-val text-green" id="tickerInrUsd">$0.0115</span></div>
+            <div class="ticker-item"><span class="ticker-sym">BRENT CRUDE</span> <span class="ticker-val text-red">₹6,240.00</span></div>
+            <!-- Duplicate for seamless infinite marquee loop -->
+            <div class="ticker-item"><span class="ticker-sym">NIFTY 50</span> <span class="ticker-val text-green">₹24,205.30</span></div>
+            <div class="ticker-item"><span class="ticker-sym">SENSEX</span> <span class="ticker-val text-green">₹79,420.50</span></div>
+            <div class="ticker-item"><span class="ticker-sym">RELIANCE</span> <span class="ticker-val text-green">₹2,985.40</span></div>
+            <div class="ticker-item"><span class="ticker-sym">TCS</span> <span class="ticker-val text-green">₹3,940.20</span></div>
+            <div class="ticker-item"><span class="ticker-sym">HDFCBANK</span> <span class="ticker-val text-green">₹1,682.50</span></div>
+            <div class="ticker-item"><span class="ticker-sym">USD/INR</span> <span class="ticker-val">₹86.85</span></div>
+            <div class="ticker-item"><span class="ticker-sym">INR/USD</span> <span class="ticker-val text-green">$0.0115</span></div>
+        </div>
+    </div>
+
+    <!-- 2. MAIN HEADER -->
+    <header class="main-header">
+        <div class="header-branding">
+            <div class="brand-icon">Δ</div>
+            <div class="brand-text">
+                <h1>AlphaQuant AI <span class="brand-badge">TERMINAL v3.2</span></h1>
+                <div class="brand-sub">Indian Stock Market (NSE & BSE) Trend Prediction & Quantitative Machine Learning</div>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <div class="data-source-pill">
+                <span>Data Feeds:</span> <strong>NSE India • BSE • Investing.com (₹ INR)</strong>
+            </div>
+            <button class="live-feed-sync-btn" id="syncLiveFeedBtn">
+                <span>↻ Sync Live Feed</span>
+            </button>
+            <button class="btn btn-poster" id="togglePosterModeBtn">
+                <span>🎓 Poster Presentation Mode</span>
+            </button>
+            <button class="btn btn-primary" id="printPosterBtn">
+                <span>🖨 Print / Export</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- 3. POSTER PRESENTATION BANNER (Visible in Presentation Mode) -->
+    <div class="poster-only-banner" id="posterHeaderBanner">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h2 style="font-size: 22px; font-weight: 800; color: #fff;">RESEARCH POSTER: AI-Based Indian Stock Market Trend Prediction Using Historical Data & Machine Learning</h2>
+                <p style="font-size: 13px; color: #cbd5e1; margin-top: 4px;">
+                    Multi-Factor Sequential Forecasting Architecture • Data Sourced from NSE, BSE, RBI & Investing.com • Walk-Forward Validation in INR (₹)
+                </p>
+            </div>
+            <div style="background: rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 6px; text-align: right;">
+                <div style="font-size: 11px; color: #94a3b8;">Methodology</div>
+                <div style="font-size: 13px; font-weight: 700; color: #38bdf8;">Hybrid CNN-BiLSTM + Attention</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. INDIAN STOCK MARKET SEARCH & UNIVERSE BAR -->
+    <section class="search-universe-section">
+        <div class="search-top-row">
+            <div class="search-bar-wrapper">
+                <span class="search-icon-inside">🔍</span>
+                <input 
+                    type="text" 
+                    id="stockSearchInput" 
+                    name="stock_search_query"
+                    class="stock-search-input" 
+                    placeholder="Search Indian Stocks across NSE & BSE (e.g. Reliance, TCS, HDFC Bank, Tata Motors, Nifty 50, BSE Sensex)..." 
+                    autocomplete="off"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                    data-lpignore="true"
+                >
+                <span class="search-trailing-badge">NSE • BSE • Investing.com</span>
+                <div class="search-results-dropdown" id="searchResultsDropdown">
+                    <!-- Populated dynamically via app.js -->
+                </div>
+            </div>
+
+            <div class="filter-pills-bar" id="categoryFilterBar">
+                <button class="filter-pill active" data-filter="ALL">All Indian Stocks</button>
+                <button class="filter-pill" data-filter="NIFTY50">Nifty 50</button>
+                <button class="filter-pill" data-filter="INDICES">BSE Sensex & Indices</button>
+                <button class="filter-pill" data-filter="BANKING">Banking & Finance</button>
+                <button class="filter-pill" data-filter="TECH">IT & Tech</button>
+                <button class="filter-pill" data-filter="AUTO">Auto & EV</button>
+                <button class="filter-pill" data-filter="ENERGY">Energy & Power</button>
+                <button class="filter-pill" data-filter="DEFENSE">Defense & PSUs</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. QUICK ASSET SELECTOR BAR -->
+    <nav class="asset-bar" id="quickAssetBar">
+        <span class="asset-label">Popular Indian Equities:</span>
+        <button class="asset-btn active" data-symbol="RELIANCE">
+            <span>RELIANCE</span> <small>Reliance</small>
+        </button>
+        <button class="asset-btn" data-symbol="TCS">
+            <span>TCS</span> <small>Tata Consultancy</small>
+        </button>
+        <button class="asset-btn" data-symbol="HDFCBANK">
+            <span>HDFCBANK</span> <small>HDFC Bank</small>
+        </button>
+        <button class="asset-btn" data-symbol="INFY">
+            <span>INFY</span> <small>Infosys</small>
+        </button>
+        <button class="asset-btn" data-symbol="TATAMOTORS">
+            <span>TATAMOTORS</span> <small>Tata Motors</small>
+        </button>
+        <button class="asset-btn" data-symbol="ICICIBANK">
+            <span>ICICIBANK</span> <small>ICICI Bank</small>
+        </button>
+        <button class="asset-btn" data-symbol="SBIN">
+            <span>SBIN</span> <small>SBI</small>
+        </button>
+        <button class="asset-btn" data-symbol="NIFTY50">
+            <span>NIFTY 50</span> <small>Index</small>
+        </button>
+        <button class="asset-btn" data-symbol="SENSEX">
+            <span>SENSEX</span> <small>BSE 30</small>
+        </button>
+    </nav>
+
+    <!-- 6. MAIN THREE-COLUMN DASHBOARD GRID -->
+    <main class="dashboard-grid">
+
+        <!-- ==================== LEFT COLUMN ==================== -->
+        <aside class="col-left">
+            
+            <!-- CARD 1: GLOBAL & INDIAN MACROECONOMIC FEEDS (RBI / MoSPI / Investing.com) -->
+            <section class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3v18h18M18 9l-5 5-4-4-6 6"></path></svg>
+                        Macroeconomic Feeds
+                    </h3>
+                    <span style="font-size: 10px; color: var(--text-muted);">RBI / Investing.com</span>
+                </div>
+                <div class="macro-grid" id="macroGrid">
+                    <!-- Populated dynamically via app.js -->
+                </div>
+            </section>
+
+            <!-- CARD 2: REAL-TIME TECHNICAL INDICATORS (TradingView / Investing.com Framework) -->
+            <section class="card" id="techSummaryCard">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+                        Real-Time Technical Indicators
+                    </h3>
+                    <span class="stat-badge badge-green" id="techSummaryBadge">BUY</span>
+                </div>
+                <div style="margin: 10px 0;">
+                    <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px;">
+                        <span style="color: var(--text-muted);">Consensus Indicator Signal</span>
+                        <span id="techVotesBreakdown" style="font-weight: 700; color: var(--accent-cyan);">11 Buy | 1 Neutral | 2 Sell</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" id="techScoreBar" style="width: 82%; background: var(--bull-green);"></div>
+                    </div>
+                </div>
+
+                <!-- Live Real-Time Indicator Values Table -->
+                <div class="ind-live-table" id="indLiveTable">
+                    <div class="ind-row">
+                        <span class="ind-name">RSI (14)</span>
+                        <span class="ind-val text-cyan" id="indValRsi">58.42</span>
+                        <span class="ind-badge badge-neutral" id="indBadgeRsi">NEUTRAL</span>
+                    </div>
+                    <div class="ind-row">
+                        <span class="ind-name">MACD (12,26,9)</span>
+                        <span class="ind-val text-green" id="indValMacd">+14.20</span>
+                        <span class="ind-badge badge-bull" id="indBadgeMacd">BULLISH</span>
+                    </div>
+                    <div class="ind-row">
+                        <span class="ind-name">SMA 20 vs 50</span>
+                        <span class="ind-val" id="indValSma">₹2,950 / ₹2,910</span>
+                        <span class="ind-badge badge-bull" id="indBadgeSma">GOLDEN CROSS</span>
+                    </div>
+                    <div class="ind-row">
+                        <span class="ind-name">Bollinger Bands</span>
+                        <span class="ind-val" id="indValBb">₹2,860 - ₹3,040</span>
+                        <span class="ind-badge badge-neutral" id="indBadgeBb">MID-BAND</span>
+                    </div>
+                    <div class="ind-row">
+                        <span class="ind-name">ATR (14 Volatility)</span>
+                        <span class="ind-val text-cyan" id="indValAtr">₹46.50</span>
+                        <span class="ind-badge badge-neutral" id="indBadgeAtr">NORMAL</span>
+                    </div>
+                    <div class="ind-row">
+                        <span class="ind-name">Stochastic %K</span>
+                        <span class="ind-val" id="indValStoch">62.8%</span>
+                        <span class="ind-badge badge-bull" id="indBadgeStoch">MOMENTUM UP</span>
+                    </div>
+                </div>
+
+                <div style="font-size: 10px; color: var(--text-muted); line-height: 1.4; margin-top: 8px; display: flex; align-items: center; justify-content: space-between;">
+                    <span>Live NSE/BSE & TradingView Feed</span>
+                    <span class="text-green">● Real-Time</span>
+                </div>
+            </section>
+
+        </aside>
+
+        <!-- ==================== CENTER COLUMN ==================== -->
+        <section class="col-center">
+            
+            <!-- ASSET HEADER BAR -->
+            <div class="asset-summary-bar">
+                <div class="asset-title-group">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <h2 id="currentAssetName">Reliance Industries Ltd</h2>
+                        <span class="symbol-tag" id="currentAssetSymbol">RELIANCE</span>
+                        <span class="exchange-tag" id="currentAssetExchangeTag">NSE</span>
+                    </div>
+                    <p id="currentAssetExchange">NSE: RELIANCE • Energy, Petrochemicals & Telecom • Investing.com Data Feed</p>
+                </div>
+                <div class="price-display-group">
+                    <div class="current-price" id="displayCurrentPrice">₹2,985.40</div>
+                    <div class="stat-badge badge-green" id="displayExpectedReturn">+2.84% (5-Day Target: ₹3,070.20)</div>
+                </div>
+            </div>
+
+            <!-- CHART MODE SELECTOR & LIVE BADGE -->
+            <div class="chart-mode-bar">
+                <div class="chart-mode-tabs">
+                    <button class="chart-tab-btn active" id="tabTradingViewChart">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                        TradingView Live Chart + AI Forecast
+                    </button>
+                    <button class="chart-tab-btn" id="tabAiForecastChart">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a10 10 0 0 1 10 10"></path></svg>
+                        Dedicated AI Model Canvas
+                    </button>
+                </div>
+                <div class="chart-live-badge">
+                    <span class="pulse-dot"></span> LIVE NSE / BSE REAL-TIME STREAM
+                </div>
+            </div>
+
+            <!-- 1. PRIMARY VIEW: TRADINGVIEW ADVANCED REAL-TIME CHART WIDGET -->
+            <div id="tradingview_widget_wrapper" style="height: 440px; width: 100%; position: relative; border-radius: 8px; border: 1px solid var(--border-color); overflow: hidden; background: #0b0f19;">
+                <div id="tradingview_chart_container" style="height: 100%; width: 100%;">
+                    <!-- Populated dynamically via app.js initTradingViewChart() -->
+                </div>
+            </div>
+
+            <!-- INTEGRATED REAL-TIME AI FORECAST CONE MODULE -->
+            <div class="ai-forecast-integration-card" id="aiForecastIntegrationCard">
+                <div class="ai-forecast-integration-header">
+                    <div class="ai-forecast-integration-title">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a10 10 0 0 1 10 10"></path></svg>
+                        <span>AI Forecast Cone &amp; ML Analysis (Integrated with TradingView Real-Time Data)</span>
+                    </div>
+                    <span class="ai-forecast-sync-tag">⚡ Live Sequential Drift &amp; Vol Calibration</span>
+                </div>
+
+                <div class="ai-cone-stats-grid">
+                    <div class="ai-cone-stat-box">
+                        <div class="ai-cone-stat-title">5-Day AI Target</div>
+                        <div class="ai-cone-stat-num text-green" id="coneTarget5D">₹3,070.20 (+2.84%)</div>
+                        <div class="ai-cone-stat-sub">Directional Median</div>
+                    </div>
+                    <div class="ai-cone-stat-box">
+                        <div class="ai-cone-stat-title">80% Confidence Band</div>
+                        <div class="ai-cone-stat-num text-cyan" id="coneBand80">₹2,990 - ₹3,150</div>
+                        <div class="ai-cone-stat-sub">1.28σ Probability Envelope</div>
+                    </div>
+                    <div class="ai-cone-stat-box">
+                        <div class="ai-cone-stat-title">95% Confidence Band</div>
+                        <div class="ai-cone-stat-num" id="coneBand95" style="color: #cbd5e1;">₹2,920 - ₹3,220</div>
+                        <div class="ai-cone-stat-sub">1.96σ Outlier Boundary</div>
+                    </div>
+                    <div class="ai-cone-stat-box">
+                        <div class="ai-cone-stat-title">Live Drift &amp; Vol</div>
+                        <div class="ai-cone-stat-num text-cyan" id="coneDriftVol">μ: +18.4% | σ: 22.1%</div>
+                        <div class="ai-cone-stat-sub">Annualized GBM Parameters</div>
+                    </div>
+                </div>
+
+                <!-- Integrated Mini Forecast Cone Canvas -->
+                <div class="integrated-cone-canvas-wrapper">
+                    <canvas id="integratedForecastCanvas"></canvas>
+                </div>
+            </div>
+
+            <!-- 2. SECONDARY VIEW: DEDICATED AI PREDICTION CANVAS (Toggled via tab) -->
+            <div id="ai_canvas_wrapper" style="display: none;">
+                <!-- CHART OVERLAYS CONTROLS -->
+                <div class="chart-controls">
+                    <div class="indicator-toggles">
+                        <span style="color: var(--text-muted); font-weight: 700;">Overlays:</span>
+                        <label class="toggle-label">
+                            <input type="checkbox" id="toggleSMA20" checked>
+                            <span>SMA 20 (Amber)</span>
+                        </label>
+                        <label class="toggle-label">
+                            <input type="checkbox" id="toggleSMA50" checked>
+                            <span>SMA 50 (Blue)</span>
+                        </label>
+                        <label class="toggle-label">
+                            <input type="checkbox" id="toggleBollinger" checked>
+                            <span>Bollinger Bands</span>
+                        </label>
+                        <label class="toggle-label">
+                            <input type="checkbox" id="toggleForecastCone" checked>
+                            <span style="color: var(--accent-cyan); font-weight: 700;">AI Forecast Cone (80/95%)</span>
+                        </label>
+                    </div>
+                    <div style="color: var(--text-muted);">
+                        <small>Scroll to Zoom • Drag to Pan</small>
+                    </div>
+                </div>
+
+                <!-- MASTER CANDLESTICK & AI FORECAST CHART -->
+                <div class="chart-viewport" id="masterChartContainer" style="height: 400px; position: relative;">
+                    <!-- Canvas generated by chart.js -->
+                </div>
+
+                <!-- RSI (14) SUBCHART -->
+                <div class="subchart-viewport" id="rsiChartContainer" style="height: 110px; position: relative;">
+                    <!-- Canvas generated by chart.js -->
+                </div>
+            </div>
+
+            <!-- MATHEMATICAL FOUNDATION CALLOUT (For Academic Poster Presentation) -->
+            <div class="poster-math-callout">
+                <div style="font-weight: 700; color: var(--accent-cyan); margin-bottom: 6px;">
+                    📐 FORMULATION & ALGORITHMIC ARCHITECTURE (POSTER PANEL 2)
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; color: #cbd5e1;">
+                    <div>
+                        <strong>Stationary Target (r_t):</strong><br>
+                        r_t = ln(P_t / P_{t-1})<br>
+                        Δ y_{t+1} = II(P_{t+1} &gt; P_t)
+                    </div>
+                    <div>
+                        <strong>Relative Strength (RSI):</strong><br>
+                        RSI = 100 - (100 / (1 + EMA(Gains)/EMA(Losses)))
+                    </div>
+                    <div>
+                        <strong>Deep Attention Mechanism:</strong><br>
+                        Attention(Q,K,V) = softmax(QK^T / √d_k) V
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ==================== RIGHT COLUMN ==================== -->
+        <aside class="col-right">
+
+            <!-- CARD 1: MODEL SELECTOR & SIGNAL VERDICT -->
+            <section class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                        AI Machine Learning Model
+                    </h3>
+                </div>
+
+                <div class="model-select-wrapper">
+                    <select class="form-select" id="modelSelector">
+                        <option value="CNN_LSTM" selected>Hybrid CNN-BiLSTM + Attention (Deep Learning)</option>
+                        <option value="TRANSFORMER">Temporal Fusion Transformer (TFT)</option>
+                        <option value="XGBOOST">XGBoost Classifier (Ensemble Trees)</option>
+                        <option value="RANDOM_FOREST">Random Forest (Bagging Multi-Factor)</option>
+                    </select>
+                </div>
+
+                <!-- PREDICTION VERDICT CARD -->
+                <div class="prediction-card">
+                    <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">
+                        Next-Day & 5-Day Trend Signal
+                    </div>
+                    <div class="signal-pill pill-bullish" id="aiSignalPill">STRONG BUY</div>
+                    
+                    <!-- PROBABILITY METER -->
+                    <div class="probability-split">
+                        <div class="split-labels">
+                            <span class="text-green">BULLISH: <span id="probUpText">78.4%</span></span>
+                            <span class="text-red">BEARISH: <span id="probDownText">21.6%</span></span>
+                        </div>
+                        <div class="split-bar-track">
+                            <div class="split-up" id="probUpBar" style="width: 78.4%;"></div>
+                            <div class="split-down" id="probDownBar" style="width: 21.6%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VALIDATION METRICS (WALK-FORWARD) -->
+                <div style="font-size: 11px; font-weight: 700; color: var(--text-secondary); margin-top: 10px;">
+                    Out-of-Sample Walk-Forward Validation:
+                </div>
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="metric-label">Directional Hit Rate</div>
+                        <div class="metric-val" id="metricAccuracy">63.8%</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">F1-Score</div>
+                        <div class="metric-val" id="metricF1">0.67</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Precision (Up)</div>
+                        <div class="metric-val" id="metricPrecision">0.69</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Sharpe Ratio</div>
+                        <div class="metric-val" id="metricSharpe">1.88</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CARD 2: SHAP FEATURE IMPORTANCE -->
+            <section class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                        Feature Importance (SHAP Breakdown)
+                    </h3>
+                </div>
+                <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 12px;">
+                    Quantifies the relative contribution of each technical & macro factor to the AI prediction:
+                </div>
+                <div id="featureImportanceList">
+                    <!-- Populated dynamically via app.js -->
+                </div>
+            </section>
+
+        </aside>
+
+    </main>
+
+    <!-- 7. REAL-TIME INDIAN MARKET NEWS & FinBERT SENTIMENT FEED -->
+    <section class="horizontal-news-section">
+        <div class="horizontal-news-container">
+            <div class="horizontal-news-header">
+                <div class="hn-title-group">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><path d="M22 6l-10 7L2 6"></path></svg>
+                    <h3>Real-Time Indian Market News &amp; FinBERT Sentiment Analysis</h3>
+                    <span class="hn-live-pill"><span class="pulse-dot"></span> LIVE NEWSWIRE</span>
+                </div>
+                <div class="hn-sentiment-summary" id="hnSentimentSummary">
+                    <span>Overall Market Sentiment:</span>
+                    <strong class="text-green">+0.81 (HIGHLY BULLISH)</strong>
+                </div>
+            </div>
+
+            <div class="horizontal-news-viewport" id="horizontalNewsViewport">
+                <div class="horizontal-news-track" id="horizontalNewsTrack">
+                    <!-- Populated dynamically via app.js renderNewsFeed() -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Application Scripts (Always load immediately) -->
+    <script src="js/nse-bse-stocks.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/indicators.js"></script>
+    <script src="js/ml-engine.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/app.js"></script>
+    <!-- TradingView widget script (Async, non-blocking) -->
+    <script async src="https://s3.tradingview.com/tv.js"></script>
+</body>
+</html>

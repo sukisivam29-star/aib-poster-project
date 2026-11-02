@@ -1,0 +1,23 @@
+# Windows temporary files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# IDE / Editor folders
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# OS temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# Logs
+*.log
+
